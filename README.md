@@ -5,10 +5,10 @@ I collected a dataset of about 150k instances of movie titles, along side with t
 The objective was to generate a random movie title considering the input rating, so that the generated title is conditioned on the input rating (i.e. a lower rating should produce a movie title that if had existed it would have gotten a bad rating on IMDB and vice-versa).
 The resulting language model is modeling the following probabilities:
 
-> P(token1 | [rating])
-> P(token2 | [rating] token1)
-> P(token3 | [rating] token1 token2)
-> ...
+> P(token1 | [rating])  
+> P(token2 | [rating] token1)  
+> P(token3 | [rating] token1 token2)  
+> ...  
 > P(tokenN | [rating] token1 token2 ...)
 
 I'm not uploading the dataset here, but I've uploaded the model weights so you can try to generate titles on your machine.
@@ -27,18 +27,18 @@ The uploaded pretrained model was trained with batch size = 128, d_model = 128, 
 
 ## Examples
 multinomial with temperature sampling = 0.8 (no top_k or top_p sampling used/implemented)
-> $ python3 eval.py 7.8
-> Work and Lost Blood
-> $ python3 eval.py 7.8
-> Agenta: The Unknown
-> $ python3 eval.py 6.8
-> Where the Boy's Doors?
-> $ python3 eval.py 6.8
-> Walk on the Pleasure
-> $ python3 eval.py 5.4
-> Miss in the Rain
-> $ python3 eval.py 5.4
-> Words for Darkness
+> $ python3 eval.py 7.8  
+> Work and Lost Blood  
+> $ python3 eval.py 7.8  
+> Agenta: The Unknown  
+> $ python3 eval.py 6.8  
+> Where the Boy's Doors?  
+> $ python3 eval.py 6.8  
+> Walk on the Pleasure  
+> $ python3 eval.py 5.4  
+> Miss in the Rain  
+> $ python3 eval.py 5.4  
+> Words for Darkness  
 
 Have fun!
 
