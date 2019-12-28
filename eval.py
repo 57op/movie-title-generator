@@ -1,13 +1,13 @@
 import sys
-import math
-
 import torch
 import sentencepiece as spm
 
 from pathlib import Path
 from model import Model
 
-device = torch.device('cpu') # 'cuda' if torch.cuda.is_available() else 'cpu')
+# inference on cpu
+device = torch.device('cpu')
+
 sp = spm.SentencePieceProcessor()
 sp.Load('models/bpe.model')
 special_chars = {
@@ -25,6 +25,9 @@ model = Model(
   d_model=d_model,
   nhead=nhead,
   dim_feedforward=dim_feedforward).to(device)
-model.load_state_dict(torch.load(next(Path('models').glob('*.torch'))))
+model.load_state_dict(
+  torch.load(
+    next(Path('models').glob('*.torch')),
+    map_location=device))
 model.eval()
 print(model.predict(float(sys.argv[1]), sp, special_chars, temperature=0.8))
