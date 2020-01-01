@@ -11,7 +11,7 @@ class DataLoader:
       max_tgt = 0
       
       for movie in self.movies[i : i + bs]:
-        tgt = [int(movie['rating'] / 10 * 101)] + sp.EncodeAsIds(movie['title']) + [special_chars['</s>']]
+        tgt = [int(movie['rating'] / 10 * 100)] + sp.EncodeAsIds(movie['title']) + [special_chars['</s>']]
         max_tgt = max(max_tgt, len(tgt))
         targets.append(tgt)
         
