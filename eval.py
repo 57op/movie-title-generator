@@ -27,7 +27,18 @@ model = Model(
   dim_feedforward=dim_feedforward).to(device)
 model.load_state_dict(
   torch.load(
-    next(Path('models').glob('*.torch')),
+    'models/colab_epoch1120.torch',
     map_location=device))
 model.eval()
-print(model.predict(float(sys.argv[1]), sp, special_chars, temperature=0.8))
+
+if __name__ == '__main__':
+  import argparse
+
+  parser = argparse.ArgumentParser()
+  parser.add_argument('rating', type=float)
+  parser.add_argument('--samples', type=int, default=1)
+
+  args = parser.parse_args()
+
+  for i in range(args.samples):
+    print(model.predict(args.rating, sp, special_chars, temperature=0.8))
